@@ -1,0 +1,3 @@
+[submodule "serpe-dialect"]
+	path = serpe-dialect
+	url = https://github.com/serpeworks/serpe-dialect.git
