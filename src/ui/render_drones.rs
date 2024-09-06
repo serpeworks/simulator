@@ -1,11 +1,9 @@
 use bevy::{prelude::*, render::mesh::PrimitiveTopology};
 
 use crate::{
-    domain::{drone::Drone, mission::Mission},
+    domain::{coordinates::COORDS_ZOOM, drone::Drone, mission::Mission},
     misc::selected_drone::SelectedDrone,
 };
-
-pub const ZOOM: f32 = 1000.0;
 
 #[derive(Component)]
 pub struct Temporary;
@@ -17,8 +15,8 @@ pub fn system_render_drones(
     asset_server: Res<AssetServer>,
 ) {
     for (entity, drone, mut trans, mission_opt) in drones_query.iter_mut() {
-        trans.translation.x = drone.coordinates.longitude * ZOOM;
-        trans.translation.y = drone.coordinates.latitude * ZOOM;
+        trans.translation.x = drone.coordinates.longitude * COORDS_ZOOM;
+        trans.translation.y = drone.coordinates.latitude * COORDS_ZOOM;
 
         if let Some(selected) = selected_drone.entity {
             if selected != entity {
@@ -35,8 +33,8 @@ pub fn system_render_drones(
                     texture: asset_server.load("target.png"),
                     transform: Transform {
                         translation: Vec3::new(
-                            target.longitude * ZOOM,
-                            target.latitude * ZOOM,
+                            target.longitude * COORDS_ZOOM,
+                            target.latitude * COORDS_ZOOM,
                             0.0,
                         ),
                         scale: Vec3::new(0.007, 0.007, 1.0),

@@ -3,7 +3,7 @@ use std::time::Duration;
 use crate::{
     domain::{
         connection::Connection,
-        coordinates::Coordinates,
+        coordinates::{Coordinates, COORDS_ZOOM},
         drone::{ConnectionState, Drone, DroneState},
     },
     io::{IOMessage, IOResource},
@@ -204,7 +204,7 @@ fn render_drone_coordinates(
 
     if ui.button("Center").clicked() {
         let mut camera = camera_query.single_mut();
-        camera.translation.x = coordinates.longitude * ZOOM;
-        camera.translation.y = coordinates.latitude * ZOOM;
+        camera.translation.x = coordinates.longitude * COORDS_ZOOM;
+        camera.translation.y = coordinates.latitude * COORDS_ZOOM;
     }
 }
