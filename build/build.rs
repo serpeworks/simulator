@@ -15,7 +15,7 @@ fn main() {
     BuildHelper::builder(&destination)
         .set_sources(&sources)
         .set_manifest_path(&manifest_path)
-        .set_serde(true)
+        .set_serde(false)
         .generate()
         .unwrap();
 }

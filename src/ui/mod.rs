@@ -32,7 +32,6 @@ pub fn system_drone_ui_left_panel(
 pub fn system_drone_ui_right_panel(
     mut commands: Commands,
     mut contexts: EguiContexts,
-    mut id_tracker: ResMut<DroneIdTracker>,
     mut selected_drone: ResMut<SelectedDrone>,
     mut selected_drones_query: Query<(Entity, &mut Drone, Option<&mut Connection>)>,
     mut io_sender: ResMut<IOResource>,

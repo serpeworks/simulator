@@ -71,7 +71,7 @@ fn create_new_drone(
         .insert(SpriteBundle {
             texture: asset_server.load("drone.png"),
             transform: Transform {
-                scale: Vec3::new(0.003, 0.003, 1.0), // Scale down to 10% of its original size
+                scale: Vec3::new(0.003, 0.003, 1.0),
                 ..Default::default()
             },
             ..Default::default()

@@ -13,6 +13,8 @@ use crate::{
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts};
 
+use super::render_drones::ZOOM;
+
 const COORDINATES_DRAG_SPEED: f64 = 0.00001;
 
 pub fn show_right_window(
@@ -54,9 +56,9 @@ fn show_drone_details_window(
 
     let mut is_open = true;
     egui::Window::new("Drone Details")
-        .fixed_size((300.0, 200.0)) // Make the window always expanded with a fixed size
-        .default_pos(window_pos) // Position the window on the right
-        .open(&mut is_open) // Handle the "X" close button
+        .fixed_size((300.0, 200.0))
+        .default_pos(window_pos)
+        .open(&mut is_open) 
         .show(contexts.ctx_mut(), |ui| {
             render_drone_details(
                 commands,
@@ -70,7 +72,7 @@ fn show_drone_details_window(
         });
 
     if !is_open {
-        selected_drone.entity = None; // Close the details window if "X" is clicked
+        selected_drone.entity = None;
     }
 }
 
@@ -204,7 +206,7 @@ fn render_drone_coordinates(
 
     if ui.button("Center").clicked() {
         let mut camera = camera_query.single_mut();
-        camera.translation.x = coordinates.longitude * 1000.0;
-        camera.translation.y = coordinates.latitude * 1000.0;
+        camera.translation.x = coordinates.longitude * ZOOM;
+        camera.translation.y = coordinates.latitude * ZOOM;
     }
 }

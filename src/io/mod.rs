@@ -165,19 +165,29 @@ pub async fn write(
     }
 }
 
-pub async fn listen(_: SerpeDialectSender, mut real_receiver: RealReceiver) {
+pub async fn listen(sender: SerpeDialectSender, mut real_receiver: RealReceiver) {
     while let Ok(frame) = real_receiver.recv().await {
-        match frame.decode::<SerpeDialect>().unwrap() {
-            SerpeDialect::HeartbeatAck(_) => {
+        match frame.decode::<SerpeDialect>() {
+            Ok(message) => {
+                match message {
+                    SerpeDialect::HeartbeatAck(_) => {
+                        // ignore hearbeat ack
+                    }
+                    SerpeDialect::MissionAcceptAck(_) => {
+                        let _ = sender.try_send(message);
+                    }
+                    SerpeDialect::MissionRequest(_) => {
+                        let _ = sender.try_send(message);
+                    }
+                    SerpeDialect::MissionFinishedAck(_) => {
+                        let _ = sender.try_send(message);
+                    }
+                    _ => {
+                        continue;
+                    }
+                }
             }
-            SerpeDialect::MissionRequest(_) => {
-                todo!()
-            }
-            SerpeDialect::MissionFinishedAck(_) => {
-                todo!()
-            }
-            _ => {
-                continue;
+            Err(_) => {
             }
         }
     }
