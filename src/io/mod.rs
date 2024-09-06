@@ -187,8 +187,7 @@ pub async fn listen(sender: SerpeDialectSender, mut real_receiver: RealReceiver)
                     }
                 }
             }
-            Err(_) => {
-            }
+            Err(_) => {}
         }
     }
 }

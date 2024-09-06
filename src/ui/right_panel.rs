@@ -13,8 +13,6 @@ use crate::{
 use bevy::prelude::*;
 use bevy_egui::{egui, EguiContexts};
 
-use super::render_drones::ZOOM;
-
 const COORDINATES_DRAG_SPEED: f64 = 0.00001;
 
 pub fn show_right_window(
@@ -58,7 +56,7 @@ fn show_drone_details_window(
     egui::Window::new("Drone Details")
         .fixed_size((300.0, 200.0))
         .default_pos(window_pos)
-        .open(&mut is_open) 
+        .open(&mut is_open)
         .show(contexts.ctx_mut(), |ui| {
             render_drone_details(
                 commands,

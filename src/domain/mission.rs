@@ -7,11 +7,9 @@ use crate::{
         serpe_dialect::messages::{MissionAccept, MissionUpdate},
         SerpeDialect,
     },
-    misc::selected_drone::{self, SelectedDrone},
-    ui::render_drones::ZOOM,
 };
 
-use super::{connection::Connection, coordinates::Coordinates, drone::Drone};
+use super::{connection::Connection, coordinates::{Coordinates, COORDS_ZOOM}, drone::Drone};
 
 const DRONE_SPEED: f32 = 0.001;
 
@@ -116,8 +114,8 @@ pub fn system_mission_update_sender(
                     .sender
                     .try_send(crate::mavlink::dialects::SerpeDialect::MissionUpdate(
                         MissionUpdate {
-                            current_latitude: drone.coordinates.latitude * ZOOM,
-                            current_longitude: drone.coordinates.longitude * ZOOM,
+                            current_latitude: drone.coordinates.latitude * COORDS_ZOOM,
+                            current_longitude: drone.coordinates.longitude * COORDS_ZOOM,
                         },
                     ));
         }

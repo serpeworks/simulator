@@ -28,7 +28,6 @@ pub fn system_heartbeat(
 
     if current_time.duration_since(heartbeat_timer.last_time) >= Duration::from_secs(1) {
         for (drone, connection) in connection_query.iter_mut() {
-
             let _ = connection
                 .sender
                 .try_send(crate::mavlink::dialects::SerpeDialect::Heartbeat(
